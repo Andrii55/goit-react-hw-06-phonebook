@@ -1,51 +1,54 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from './ContactForm.module.css';
 
-export class ContactForm extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export const ContactForm = ({ addContact }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.addContact(this.state);
-    this.setState({ name: '', number: '' });
+    addContact({ name, number });
+    setName('');
+    setNumber('');
   };
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
+  const handleChange = e => {
+    switch (e.target.name) {
+      case 'name':
+        setName(e.target.value);
+        break;
+      case 'number':
+        setNumber(e.target.value);
+        break;
+      default:
+        break;
+    }
   };
 
-  render() {
-    return (
-      <form className={css.form} onSubmit={this.handleSubmit}>
-        <input
-          className={css.input}
-          value={this.state.name}
-          onChange={this.handleChange}
-          type="text"
-          name="name"
-          title="User name"
-          required
-        />
-        <input
-          className={css.input}
-          value={this.state.number}
-          onChange={this.handleChange}
-          type="tel"
-          name="number"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-        <button className={css.btn} type="submit">
-          Add contact
-        </button>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={css.form} onSubmit={handleSubmit}>
+      <input
+        className={css.input}
+        value={name}
+        onChange={handleChange}
+        type="text"
+        name="name"
+        title="User name"
+        required
+      />
+      <input
+        className={css.input}
+        value={number}
+        onChange={handleChange}
+        type="tel"
+        name="number"
+        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        required
+      />
+      <button className={css.btn} type="submit">
+        Add contact
+      </button>
+    </form>
+  );
+};
