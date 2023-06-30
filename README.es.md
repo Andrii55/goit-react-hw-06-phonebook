@@ -87,7 +87,7 @@ prop `basename`, el nombre exacto de tu repositorio. Las barras inclinadas al
 principio y al final de la cadena son obligatorias.
 
 ```jsx
-<BrowserRouter basename="/your_repo_name/">
+<BrowserRouter basename="/Andrii55/">
   <App />
 </BrowserRouter>
 ```
