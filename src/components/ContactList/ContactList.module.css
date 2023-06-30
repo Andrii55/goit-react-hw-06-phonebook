@@ -1,0 +1,34 @@
+.list {
+  display: grid;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.items {
+  font-weight: bold;
+}
+
+.btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: auto;
+  color: whitesmoke;
+  font-weight: bold;
+  background-color: blue;
+  border: none;
+  border-radius: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
+  transition: 150ms linear;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: aqua;
+  color: black;
+}
