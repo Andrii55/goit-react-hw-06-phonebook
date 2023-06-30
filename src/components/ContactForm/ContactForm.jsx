@@ -1,13 +1,27 @@
 import { useState } from 'react';
 import css from './ContactForm.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts } from 'redux/selectors';
+import { nanoid } from 'nanoid';
+import { addContact } from 'redux/contactsSlice';
 
-export const ContactForm = ({ addContact }) => {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = e => {
     e.preventDefault();
-    addContact({ name, number });
+    const isExsist = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (isExsist) {
+      alert('Contact olredy exsist');
+      return;
+    }
+
+    dispatch(addContact({ name, number, id: nanoid() }));
     setName('');
     setNumber('');
   };
